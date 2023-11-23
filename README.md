@@ -1,6 +1,9 @@
 (this file will get updated both in content and in graphical interface)
+
 (!) = more research needed
+
 (?) = deciding
+
 (*) = more or less definite decision
 ________
 SOFTWARE
