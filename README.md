@@ -4,13 +4,13 @@
 (*) = more or less definite decision
 ________
 SOFTWARE
-________
+
 main code for arduino: C++ (*)
 
 
 ________
 HARDWARE
-________
+
 SCREEN:
 TFT LCD with the backlight taken off (!)
 
