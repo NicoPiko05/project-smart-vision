@@ -1,7 +1,7 @@
 (this file will get updated both in content and in graphical interface)
-! = more research needed
-? = deciding
-* = more or less definite decision
+(!) = more research needed
+(?) = deciding
+(*) = more or less definite decision
 ________
 SOFTWARE
 ________
@@ -15,8 +15,8 @@ SCREEN:
 TFT LCD with the backlight taken off (!)
 
 with a reflective layer for these reasons:
-a) others can't see where the wearer is looking
-b) more light being reflected into the LCD, beter brightness
+* others can't see where the wearer is looking
+* more light being reflected into the LCD, beter brightness
 
 a mild lightsource pointed towards the reflective layer may be included in the frame (?)
 
