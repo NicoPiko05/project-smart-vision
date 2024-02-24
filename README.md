@@ -8,24 +8,18 @@
 ________
 SOFTWARE
 
-main code for arduino: C++ (*)
-
-
+main code for raspberry: Python (*)
+connection through socket library (bluetooth) (*)
+phone app written in C# in .NET interface (!)
 ________
 HARDWARE
 
 SCREEN:
-TFT LCD with the backlight taken off (!)
-
-with a reflective layer for these reasons:
-* others can't see where the wearer is looking
-* more light being reflected into the LCD, beter brightness
-
-a mild lightsource pointed towards the reflective layer may be included in the frame (?)
+LCD display (*)
 
 COMPUTER:
-arduino nano in the frame
-the main app will be in the wearer's phone
+raspberry pi zero in the frame with a simple GUI interface processing raw info sent through bluetooth from the phone
+the main app will be in the wearer's phone.
 
 CONNECTION:
 bluetooth 5.0 (*)
