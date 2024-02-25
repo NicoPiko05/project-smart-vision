@@ -1,26 +1,21 @@
 #echo server
+#CLIENT: raspberry (tenhle kód, pc)
 import socket
 
-addr = ''
-channel = 4
+HOST = '10.0.0.85'
+PORT = 12345
 
-server = socket.socket(socket.AF_BLUETOOTH, socket.SOCK_STREAM, socket.BTPROTO_RFCOMM)
-server.connect((addr, channel))
-server.listen(1)
+sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+sock.connect((HOST, PORT))
+message = ("Connected ! :3")
+sock.send(message.encode("utf-8"))
 
-client, addr = server.accept()
+while True:
+    data = sock.recv(1024)
+    if not data:
+        break
+    print(f"Message: {data.decode('utf-8')}")
+    message = input("Enter message:")
+    sock.send(message.encode("utf-8"))
 
-try:
-    while True:
-        data = client.recv(1024)
-        if not data:
-            break
-        print(f"Message: {data.decode('utf-8')}")
-        message = input("Enter message:")
-        client.send(message.encode("utf-8"))
-
-except OSError as e:
-    pass
-
-client.close()
-server.close()
+sock.close()
