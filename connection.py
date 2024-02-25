@@ -1,17 +1,26 @@
 #echo server
 import socket
 
-HOST =        #IPv4 !!!!
-PORT = 65432 #random number chosen by me :3
+addr = ''
+channel = 4
 
-with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s: #registers socket as "s"
-    s.bind((HOST, PORT)) #binds host and port to socket
-    s.listen() #finds port
-    conn, addr = s.accept() #connects and creates a new socket object, saves the connection (host) and adress (port)
-    with conn: #with the connection (host)
-        print(f"Connected by {addr}") #prints adress (port)
-        while True:
-            data = conn.recv(1024) #recieves 1024 bytes of data
-            if not data: #closes the connection if it doesn't recieve any data (b'')
-                break
-            conn.sendall(data) #sends back?
+server = socket.socket(socket.AF_BLUETOOTH, socket.SOCK_STREAM, socket.BTPROTO_RFCOMM)
+server.connect((addr, channel))
+server.listen(1)
+
+client, addr = server.accept()
+
+try:
+    while True:
+        data = client.recv(1024)
+        if not data:
+            break
+        print(f"Message: {data.decode('utf-8')}")
+        message = input("Enter message:")
+        client.send(message.encode("utf-8"))
+
+except OSError as e:
+    pass
+
+client.close()
+server.close()
