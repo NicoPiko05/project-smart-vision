@@ -2,12 +2,13 @@
 #CLIENT: raspberry (tenhle kód, pc)
 import socket
 
-HOST = '10.0.0.85'
-PORT = 12345
+HOST = 'A0-29-42-98-7B-36' #server ip
+PORT = 4
 
-sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+sock = socket.socket(socket.AF_BLUETOOTH, socket.SOCK_STREAM, socket.BTPROTO_RFCOMM)
 sock.connect((HOST, PORT))
-message = ("Connected ! :3")
+
+message = ("Connected !")
 sock.send(message.encode("utf-8"))
 
 while True:
