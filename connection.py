@@ -2,7 +2,7 @@
 #CLIENT: raspberry (tenhle kód, pc)
 import socket
 
-HOST = "A0:29:42:98:7B:36" #server ip
+HOST = "14:99:3E:DB:03:97" #server ip
 PORT = 4
 
 sock = socket.socket(socket.AF_BLUETOOTH, socket.SOCK_STREAM, socket.BTPROTO_RFCOMM)
