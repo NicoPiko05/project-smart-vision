@@ -32,7 +32,7 @@ def show_on_display(text):
         disp.clear()
         disp.bl_DutyCycle(50)
         Font1 = ImageFont.truetype("../Font/Font01.ttf", 25)
-        image1 = Image.new("RGB", (disp.width,disp.height ), "BLACK")
+        image1 = Image.new("RGB", (disp.height,disp.width ), "BLACK")
         draw = ImageDraw.Draw(image1)
         draw.text((30, 30), text, fill = "WHITE", font=Font1)
         image1=mirror_image(image1)

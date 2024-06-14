@@ -21,6 +21,7 @@ logging.basicConfig(level = logging.DEBUG)
 def mirror_image(image):
     # Mirror the image horizontally
     mirrored_image = ImageOps.mirror(image)
+    mirrored_image = mirrored_image.rotate(90)
     return mirrored_image
 
 try:
