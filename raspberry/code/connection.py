@@ -6,10 +6,12 @@ import os
 import sys
 import time
 import logging
+import threading
 import spidev as SPI
 sys.path.append("..")
 from lib import LCD_1inch9
 from PIL import Image, ImageDraw, ImageFont, ImageOps
+from datetime import datetime
 
 # Raspberry Pi pin configuration:                                                                                                                                       
 RST = 27
@@ -40,6 +42,15 @@ def show_on_display(text):
         time.sleep(15)
     except IOError as e:
         logging.info(e)
+
+def update_time_on_display():
+    while True:
+        # Get the current time, but only the minutes
+        current_time = datetime.now().strftime("%H:%M")
+        # Call the modified show_on_display function with an empty message and only time
+        show_on_display(current_time)
+        # Wait for 60 seconds before updating the time again
+        time.sleep(60)
 
 def start_server():
     try:
@@ -78,5 +89,10 @@ def start_server():
     except Exception as e:
         print(f"An error occured: {e}")
 
-if __name__ == "__main__":
-    start_server()
+# Start the server in a separate thread
+server_thread = threading.Thread(target=start_server)
+server_thread.start()
+
+# Start the time update function in a separate thread
+time_thread = threading.Thread(target=update_time_on_display)
+time_thread.start()
