@@ -31,7 +31,9 @@ class MainActivity : ComponentActivity() {
                 ) {
                     Greeting("Android")
                     GlobalScope.launch(Dispatchers.IO) {
+                        println("tries connecting")
                         Connection.ServerConnection.connect()
+                        println("tried connecting")
                         Connection.ServerConnection.sendMessage("hello")
                         Connection.ServerConnection.readMessage()
                         Connection.ServerConnection.sendMessage("hello again")

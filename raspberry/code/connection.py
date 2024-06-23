@@ -8,7 +8,7 @@ import time
 import logging
 import threading
 import spidev as SPI
-sys.path.append("..")
+sys.path.append("/home/project-smart-vision/raspberry/")
 from lib import LCD_1inch9
 from PIL import Image, ImageDraw, ImageFont, ImageOps
 from datetime import datetime
@@ -55,7 +55,7 @@ def update_time_on_display():
 def start_server():
     try:
         # Server address and port
-        server_address = '192.168.158.223'  # IP address to bind to (localhost)
+        server_address = '0.0.0.0'  #(localhost)
         server_port = 65432  # Port number to listen on
         # Create a socket object
         server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
