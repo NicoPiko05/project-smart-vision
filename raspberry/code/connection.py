@@ -7,12 +7,13 @@ import sys
 import time
 import logging
 import threading
-import spidev as SPI
-sys.path.append("/home/project-smart-vision/raspberry/")
+#import spidev as SPI
+sys.path.append("home/nico/Documents/project-smart-vision/raspberry/")
 from lib import LCD_1inch9
 from PIL import Image, ImageDraw, ImageFont, ImageOps
 from datetime import datetime
 
+#skibidi
 # Raspberry Pi pin configuration:                                                                                                                                       
 RST = 27
 DC = 25
@@ -89,6 +90,8 @@ def start_server():
     except Exception as e:
         print(f"An error occured: {e}")
 
+show_on_display("Hello, World!")
+time.sleep(5000)
 # Start the server in a separate thread
 server_thread = threading.Thread(target=start_server)
 server_thread.start()
