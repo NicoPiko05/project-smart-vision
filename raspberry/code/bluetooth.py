@@ -1,11 +1,10 @@
 import os
 import sys
 import time
-import logging
-import threading
-import connection
+#import logging
+#import threading
 
-sys.path.append("home/nico/Documents/")
+sys.path.append(os.path.expanduser("~/Documents/bluepy"))
 from bluepy import btle
 
 class BluetoothService:
