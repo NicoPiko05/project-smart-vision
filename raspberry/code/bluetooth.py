@@ -1,29 +1,37 @@
 import os
 import sys
 import time
+from bluetooth import *
 #import logging
 #import threading
 
-sys.path.append(os.path.expanduser("~/Documents/bluepy"))
-from bluepy import btle
+server_sock = BluetoothSocket(RFCOMM)
+server_sock.bind(("", PORT_ANY))
+server_sock.listen(1)
 
-class BluetoothService:
-    def __init__(self, name="SmartGlasses"):
-        self.name = name
-        self.advertise_service()
+port = server_sock.getsockname()[1]
+advertise_service(server_sock, "RaspberryPiService",
+                  service_classes=[SERIAL_PORT_CLASS],
+                  profiles=[SERIAL_PORT_PROFILE])
 
-    def advertise_service(self):
-        os.system("sudo hciconfig hci0 up")
-        os.system("sudo hciconfig hci0 piscan")
-        os.system(f"sudo hciconfig hci0 name {self.name}")
-        os.system("sudo sdptool add SP")
-        os.system("sudo rfcomm watch hci0")
+print(f"Waiting for connection on RFCOMM channel {port}...")
+os.system("bluetoothctl discoverable on")
 
-    def start(self):
-        print(f"{self.name} is now discoverable and connectable.")
+client_sock, client_info = server_sock.accept()
+print(f"Connected to {client_info}")
+os.system("bluetoothctl discoverable off")
 
-if __name__ == "__main__":
-    bt_service = BluetoothService()
-    bt_service.start()
+try:
     while True:
-        time.sleep(60)
+        data = client_sock.recv(1024)
+        if not data:
+            break
+        print(f"Received: {data.decode('utf-8')}")
+        client_sock.send("Message received!".encode('utf-8'))
+except OSError:
+    pass
+
+print("Disconnected")
+client_sock.close()
+server_sock.close()
+os.system("bluetoothctl discoverable on")  # Make discoverable again after disconnection

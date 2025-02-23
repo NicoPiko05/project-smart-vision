@@ -7,8 +7,7 @@ import sys
 import time
 import logging
 import threading
-#import spidev as SPI
-sys.path.append("home/nico/Documents/project-smart-vision/raspberry/")
+sys.path.append(os.path.expanduser("~/Documents/project-smart-vision/raspberry/"))
 from lib import LCD_1inch9
 from PIL import Image, ImageDraw, ImageFont, ImageOps
 from datetime import datetime
