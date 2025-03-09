@@ -2,16 +2,11 @@ import 'dart:async';
 import 'dart:io';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
-import 'package:permission_handler/permission_handler.dart';
 
 class BluetoothManager {
   final List<ScanResult> foundDevices = [];
 
   Future<void> initializeBluetooth() async {
-    // Request permissions
-    if (await Permission.bluetoothScan.request().isGranted &&
-        await Permission.bluetoothConnect.request().isGranted)
-      // Permissions granted, proceed with initialization
     // if your terminal doesn't support color you'll see annoying logs like `\x1B[1;35m`
     FlutterBluePlus.setLogLevel(LogLevel.verbose, color: false);
 
