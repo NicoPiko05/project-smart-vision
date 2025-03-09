@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:sv_phone/pages/home.dart';
+import 'logic/bluetooth.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,5 +15,6 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: HomePage(),
     );
+
   }
 }
