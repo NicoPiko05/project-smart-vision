@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:developer' as dev;
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import '../logic/bluetooth.dart';
 
@@ -17,6 +18,7 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     bluetoothManager.initializeBluetooth();
+    dev.log('Bluetooth initialized');
   }
 
   void _startScanning() async {
