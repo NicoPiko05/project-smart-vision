@@ -1,7 +1,4 @@
 import pyaudio
-import wave
-import queue
-import json
 import connection
 from vosk import Model, KaldiRecognizer
 
@@ -14,7 +11,7 @@ RATE = 16000
 
 
 #loads the recognizer model
-model = Model("../../Phone/vosk-model-small-cs-0.4-rhasspy")
+model = Model("../imports/vosk-model-small-cs-0.4-rhasspy")
 rec = KaldiRecognizer(model, 16000)
 
 p = pyaudio.PyAudio()
