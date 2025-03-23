@@ -78,11 +78,11 @@ class BluetoothManager {
     await FlutterBluePlus.adapterState.where((val) => val == BluetoothAdapterState.on).first;
 
     // Start scanning w/ timeout
-    // Optional: use `stopScan()` as an alternative to timeout
+    // stopScan() as an alternative
     dev.log('Starting scan');
     await FlutterBluePlus.startScan(
-      //withServices: [Guid("180D")], // match any of the specified services
-      //withNames: ["Bluno"], // *or* any of the specified names
+      //withServices: [Guid("")],
+      //withNames: [""],
       timeout: const Duration(seconds: 15),
       androidScanMode: AndroidScanMode.balanced,
     );

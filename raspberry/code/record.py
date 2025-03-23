@@ -1,10 +1,21 @@
 import pyaudio
 import wave
+import queue
+import json
+import connection
+from vosk import Model, KaldiRecognizer
 
-FRAMES_PER_BUFFER = 3200
+from raspberry.code.connection import show_on_display
+
+FRAMES_PER_BUFFER = 8192 #no idea what this all means
 FORMAT = pyaudio.paInt16
 CHANNELS = 1
 RATE = 16000
+
+
+#loads the recognizer model
+model = Model("../../Phone/vosk-model-small-cs-0.4-rhasspy")
+rec = KaldiRecognizer(model, 16000)
 
 p = pyaudio.PyAudio()
 
@@ -16,22 +27,19 @@ stream = p.open(
     frames_per_buffer=FRAMES_PER_BUFFER
 )
 print("Recording...")
+stream.start_stream()
 
-seconds = 5
-frames = []
-for i in range(0, int(RATE / FRAMES_PER_BUFFER * seconds)):
-    data = stream.read(FRAMES_PER_BUFFER)
-    frames.append(data)
+#speech to text
+while True:
+    data = stream.read(4096)
 
+    if rec.AcceptWaveform(data):
+        data = rec.Result()[14:-3]
+        show_on_display(data)
+        print(data)
+        if (data) == "konec":
+            break
+
+print("Recording finished")
 stream.stop_stream()
 stream.close()
-p.terminate()
-
-print("Finished recording.")
-
-obj = wave.open("output.wav", "wb")
-obj.setnchannels(CHANNELS)
-obj.setsampwidth(p.get_sample_size(FORMAT))
-obj.setframerate(RATE)
-obj.writeframes(b"".join(frames))
-obj.close()
