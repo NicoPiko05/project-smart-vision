@@ -1,6 +1,6 @@
 import bluetooth
 import pyaudio
-from connection import show_on_display
+from connection import show_on_screen
 import numpy as np
 
 
@@ -26,29 +26,32 @@ server_sock.listen(1)
 
 port = server_sock.getsockname()[1]
 
-bluetooth.advertise_service(server_sock, "AudioStream",
-                            service_classes=[bluetooth.SERIAL_PORT_CLASS],
-                            profiles=[bluetooth.SERIAL_PORT_PROFILE])
+uuid = "94f39d29-7d6d-437d-973b-fba39e49d4ee"
 
-print(f"Waiting for connection on RFCOMM channel {port}...")
+bluetooth.advertise_service(server_sock, "SampleServer", service_id=uuid,
+                            service_classes=[uuid, bluetooth.SERIAL_PORT_CLASS],
+                            profiles=[bluetooth.SERIAL_PORT_PROFILE],
+                            # protocols=[bluetooth.OBEX_UUID]
+                            )
 
+print("Waiting for connection on RFCOMM channel", port)
+
+# accept incoming connection
 client_sock, client_info = server_sock.accept()
 print(f"Connected to {client_info}")
 
-try:
-    while True:
-        data = stream.read(4096, exception_on_overflow=False)  # Read PCM audio
-        client_sock.sendall(data)  # Send raw PCM data
-        response = client_sock.recv(1024).decode("utf-8")  # Receive recognized text
-        if response:
-            show_on_display(response)
+# Stream audio data to the client and print processed text
+while True:
+    data = stream.read(4096, exception_on_overflow=False)  # Read PCM audio
+    client_sock.sendall(data)  # Send raw PCM data
+    response = client_sock.recv(1024).decode("utf-8")  # Receive processed text
+    if response:
+        show_on_screen(response)
+    if response == "end":
+        break
 
-except KeyboardInterrupt:
-    print("\n Stopping...")
-
-finally:
-    stream.stop_stream()
-    stream.close()
-    p.terminate()
-    client_sock.close()
-    server_sock.close()
+stream.stop_stream()
+stream.close()
+p.terminate()
+client_sock.close()
+server_sock.close()

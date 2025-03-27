@@ -2,7 +2,7 @@ import pyaudio
 import connection
 from vosk import Model, KaldiRecognizer
 
-from raspberry.code.connection import show_on_display
+from raspberry.code.connection import show_on_display, show_on_screen
 
 FRAMES_PER_BUFFER = 8192 #no idea what this all means
 FORMAT = pyaudio.paInt16
@@ -32,7 +32,7 @@ while True:
 
     if rec.AcceptWaveform(data):
         data = rec.Result()[14:-3]
-        show_on_display(data)
+        show_on_screen(data)
         print(data)
         if (data) == "konec":
             break

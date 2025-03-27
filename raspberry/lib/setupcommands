@@ -15,6 +15,7 @@ cd bluez-5.66
 sudo apt-get install -y libusb-dev libdbus-1-dev libglib2.0-dev libudev-dev libical-dev libreadline-dev
 ./configure --enable-library
 make
+sudo sdptool add SP
 
 # Install github code
 cd Documents
