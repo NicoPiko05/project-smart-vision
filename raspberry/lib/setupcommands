@@ -1,0 +1,35 @@
+sudo apt-get install emacs # or any other text editor
+
+# Install libraries
+sudo apt get update
+sudo apt install portaudio19-dev python3-pyaudio
+(setup bluetooth and install pybluez, this step takes some time, so turn on some netflix, I really reccomend "House M.D.")
+(please try only doing "sudo apt install python3-bluez" first, if it doesn't work, do the following)
+sudo apt-get install bluetooth libbluetooth-dev -y
+cd ~
+(get the latest version of bluez from https://www.bluez.org/download/, in the time of writing this is the latest version)
+wget http://www.kernel.org/pub/linux/bluetooth/bluez-5.66.tar.xz
+(change the following commands to fit the downloaded version)
+tar xvf bluez-5.66.tar.xz
+cd bluez-5.66
+sudo apt-get install -y libusb-dev libdbus-1-dev libglib2.0-dev libudev-dev libical-dev libreadline-dev
+./configure --enable-library
+make
+
+# Install github code
+cd Documents
+git clone https://github.com/NicoPiko05/project-smart-vision
+sudo emacs boot/firmware/config.txt
+(uncomment the following line)
+dtparam=spi=on
+(Add the following line to the end of the file)
+dtoverlay=googlevoicehat-soundcard
+sudo reboot
+(check if the microphone is connected)
+arecord -l
+(it should show something like this)
+//**** List of CAPTURE Hardware Devices ****
+//card 1: sndrpigooglevoi [snd_rpi_googlevoicehat_soundcar], device 0: Google voiceHAT SoundCard HiFi voicehat-hifi-0 [Google voiceHAT SoundCard HiFi voicehat-hifi-0]
+//  Subdevices: 1/1
+//  Subdevice #0: subdevice #0
+

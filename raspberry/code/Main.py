@@ -1,17 +1,23 @@
 import bluetooth
 import pyaudio
-from raspberry.code.connection import show_on_display
+from connection import show_on_display
 import numpy as np
 
+
 # Audio Configuration
-RATE = 16000  # 16kHz sample rate
-CHANNELS = 1  # Mono audio (one mic)
 FORMAT = pyaudio.paInt16  # 16-bit PCM
-CHUNK_SIZE = 1024  # 1024 samples per frame
+CHANNELS = 1  # Mono audio (one mic)
+RATE = 16000  # 16kHz sample rate
+FRAMES_PER_BUFFER = 8192  # 1024 samples per frame
 
 # PyAudio stream Setup
-audio = pyaudio.PyAudio()
-stream = audio.open(format=FORMAT, channels=CHANNELS, rate=RATE, input=True, frames_per_buffer=CHUNK_SIZE)
+p = pyaudio.PyAudio()
+stream = p.open(
+    format=FORMAT,
+    channels=CHANNELS,
+    rate=RATE,
+    input=True,
+    frames_per_buffer=FRAMES_PER_BUFFER)
 
 # Bluetooth Setup
 server_sock = bluetooth.BluetoothSocket(bluetooth.RFCOMM)
@@ -30,7 +36,7 @@ print(f"Connected to {client_info}")
 
 try:
     while True:
-        data = stream.read(CHUNK_SIZE, exception_on_overflow=False)  # Read PCM audio
+        data = stream.read(4096, exception_on_overflow=False)  # Read PCM audio
         client_sock.sendall(data)  # Send raw PCM data
         response = client_sock.recv(1024).decode("utf-8")  # Receive recognized text
         if response:
@@ -42,6 +48,6 @@ except KeyboardInterrupt:
 finally:
     stream.stop_stream()
     stream.close()
-    audio.terminate()
+    p.terminate()
     client_sock.close()
     server_sock.close()
