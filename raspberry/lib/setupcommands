@@ -3,11 +3,12 @@ sudo apt-get install emacs # or any other text editor
 # Install libraries
 sudo apt get update
 sudo apt install portaudio19-dev python3-pyaudio
-(setup bluetooth and install pybluez, this step takes some time, so turn on some netflix, I really reccomend "House M.D.")
-(please try only doing "sudo apt install python3-bluez" first, if it doesn't work, do the following)
 sudo apt-get install bluetooth libbluetooth-dev -y
+(please try only doing "sudo apt install python3-bluez" first, if it doesn't work, do the following)
+
+(setup bluetooth and install pybluez, this step takes some time, so turn on some netflix, I really reccomend House M.D. lol)
 cd ~
-(get the latest version of bluez from https://www.bluez.org/download/, in the time of writing this is the latest version)
+(get the latest version of bluez from https://www.bluez.org/download/, in the time of writing it's 5.66)
 wget http://www.kernel.org/pub/linux/bluetooth/bluez-5.66.tar.xz
 (change the following commands to fit the downloaded version)
 tar xvf bluez-5.66.tar.xz
@@ -15,6 +16,10 @@ cd bluez-5.66
 sudo apt-get install -y libusb-dev libdbus-1-dev libglib2.0-dev libudev-dev libical-dev libreadline-dev
 ./configure --enable-library
 make
+
+(go into /lib/systemd/system/bluetooth.service)
+(add -C after ExecStart=/usr/libexec/bluetooth/bluetoothd)
+reboot
 sudo sdptool add SP
 
 # Install github code
