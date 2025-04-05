@@ -15,14 +15,15 @@
             </builds>
           </compositeBuild>
         </compositeConfiguration>
+        <option name="testRunner" value="CHOOSE_PER_TEST" />
         <option name="externalProjectPath" value="$PROJECT_DIR$/sv_phone/android" />
         <option name="gradleJvm" value="openjdk-23" />
         <option name="modules">
           <set>
+            <option value="$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_bluetooth_serial-0.4.0/android" />
             <option value="$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/permission_handler_android-12.1.0/android" />
             <option value="$PROJECT_DIR$/sv_phone/android" />
             <option value="$PROJECT_DIR$/sv_phone/android/app" />
-            <option value="$PROJECT_DIR$/sv_phone/packages/flutter_bluetooth_serial/android" />
             <option value="$USER_HOME$/dev/flutter/packages/flutter_tools/gradle" />
           </set>
         </option>

@@ -6,6 +6,12 @@
       <excludeFolder url="file://$MODULE_DIR$/sv_phone/.dart_tool" />
       <excludeFolder url="file://$MODULE_DIR$/sv_phone/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/sv_phone/build" />
+      <excludeFolder url="file://$MODULE_DIR$/sv_phone/packages/flutter_bluetooth_serial/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/sv_phone/packages/flutter_bluetooth_serial/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/sv_phone/packages/flutter_bluetooth_serial/build" />
+      <excludeFolder url="file://$MODULE_DIR$/sv_phone/packages/flutter_bluetooth_serial/example/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/sv_phone/packages/flutter_bluetooth_serial/example/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/sv_phone/packages/flutter_bluetooth_serial/example/build" />
     </content>
     <orderEntry type="jdk" jdkName="Python 3.13" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
