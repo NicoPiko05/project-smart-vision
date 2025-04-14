@@ -54,7 +54,7 @@ def update_time_on_screen():
 
 
 
-show_on_display("Hello, World!")
+show_on_screen("Hello, World!")
 #time.sleep(5000)
 
 # Start the time update function in a separate thread
